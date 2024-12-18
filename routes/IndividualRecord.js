@@ -14,6 +14,7 @@ router.get("/:id", (req, res, next) => {
         }
         try {
             let taskData = JSON.parse(data);
+            console.log(taskData);
             const matchingTask = taskData.tasks.find(task => task.id === parseInt(taskId));
             if (matchingTask) {
                 res.status(200).json(matchingTask);
