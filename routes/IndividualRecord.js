@@ -1,5 +1,4 @@
 // routes/IndividualRecord.js
-const { error } = require('console');
 const express = require('express');
 const router = express.Router();
 const fileStream = require('fs');

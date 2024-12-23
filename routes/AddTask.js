@@ -5,13 +5,11 @@ const express = require("express");
 const router = express.Router();
 const fileStream = require("fs");
 
-router.post("/", (req, res, next) => {
+router.post("/tasks",  (req, res, next) => {
   console.log(req.body);
   const { title='' , description='', completed='' } = req.body;
 
-  if(title.length > 0 && description.length>0 && completed.length > 0)
-  {
-    fileStream.readFile("./task.json", (err, data) => {
+    afileStream.readFile("./task.json", (err, data) => {
         if (err) {
           console.error("Error reading file", err);
           return res.status(500).send("Internal Server Error");
@@ -40,12 +38,12 @@ router.post("/", (req, res, next) => {
               if (err) {
                 return res.status(400).json("Internal Server error");
               } else {
-                console.log("File written successfully");
+                res.status(200).json("File updated with new task details");
+                res.end();
               }
             });
     
-            res.status(200).json("File updated with new task details");
-            res.end();
+           
           } else {
             return res.status(400).json("Incorrect data types");
           }
@@ -54,11 +52,8 @@ router.post("/", (req, res, next) => {
           return res.status(500).send("Error parsing JSON data");
         }
       });
-  }
-  else
-  {
-    return res.status(400).json("Incomplete parameters")
-  }
+  
+ 
   
 });
 
